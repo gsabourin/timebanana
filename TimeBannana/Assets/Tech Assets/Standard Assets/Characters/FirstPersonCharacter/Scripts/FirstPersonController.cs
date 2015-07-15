@@ -130,6 +130,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					playerSize = playerSize +0.25f;
 				}else{}
 				m_WalkSpeed = 5f;
+				isSliding = false;
 				canRun = true;
 			}
 			//m_Camera.transform.position = new Vector3 (m_Camera.transform.position.x,cameraY,m_Camera.transform.position.z);
