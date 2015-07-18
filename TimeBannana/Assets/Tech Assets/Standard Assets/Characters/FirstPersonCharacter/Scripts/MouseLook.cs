@@ -15,10 +15,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool smooth;
         public float smoothTime = 5f;
 		public int i = 0;
+		public FirstPersonController cController;
 
+		void Start (){
+			cController = GameObject.Find ("Player_NEW").GetComponent <FirstPersonController> ();
+		}
 		void Update (){
-
-			Debug.Log(Input.GetJoystickNames()[i] + " is moved");
+			Debug.Log(Input.GetJoystickNames());
 		}
 		
 		private Quaternion m_CharacterTargetRot;
@@ -34,24 +37,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public float xRot;
         public void LookRotation(Transform character, Transform camera)
         {
-			float deadzone = 0.1f;
-
-				yRot = Input.GetAxis ("Mouse X") * XSensitivity;
-				xRot = Input.GetAxis ("Mouse Y") * YSensitivity;
-
-			Vector2 stickInput = new Vector2 (xRot, yRot);
-			stickInput = stickInput.normalized * ((stickInput.magnitude - deadzone) / (1 - deadzone));
-
-			if (stickInput.magnitude < deadzone){
+			/*if(i >0) Check for controllers
+			yRot = Input.GetAxis ("Mouse X") * XSensitivity;
+			xRot = Input.GetAxis ("Mouse Y") * YSensitivity;
+			}*/
+			float deadzone = 0.25f;
+			Vector2 stickInput = new Vector2(Input.GetAxis("Mouse Y") *YSensitivity, Input.GetAxis("Mouse X") *XSensitivity);
+			if(stickInput.magnitude < deadzone)
 				stickInput = Vector2.zero;
-			}
-			if (stickInput.magnitude > deadzone){
+			else
+				stickInput = stickInput.normalized * ((stickInput.magnitude - deadzone) / (1 - deadzone));
+
+
             	m_CharacterTargetRot *= Quaternion.Euler (0f, stickInput.y, 0f);
             	m_CameraTargetRot *= Quaternion.Euler (-stickInput.x, 0f, 0f);
-			}
-            if(clampVerticalRotation)
-                m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
 
+            if (clampVerticalRotation) {
+				m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
+			}
             if(smooth)
             {
                 character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
@@ -71,7 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             q.x /= q.w;
             q.y /= q.w;
-            q.z /= q.w;
+           // q.z /= q.w;
             q.w = 1.0f;
 
             float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan (q.x);

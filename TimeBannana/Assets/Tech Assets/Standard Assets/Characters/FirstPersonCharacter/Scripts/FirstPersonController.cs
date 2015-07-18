@@ -51,9 +51,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private CapsuleCollider m_CollisionTrig;
 		private bool canRun;
 		private float crouchCounter;
-		public float Velocity;
+		public Vector2 Velocity;
 		private float wallRunTimer =0F;
-		public bool RayCheck;
 
 		// Use this for initialization
         private void Start()
@@ -123,8 +122,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					isSliding = true;
  					StartCoroutine (Slide());
 				}else{}
-				m_WalkSpeed = 2f;
-				canRun = false;
+					m_WalkSpeed = 2f;
+					canRun = false;
 			} else {
 				if(playerSize <1.8f){
 					playerSize = playerSize +0.25f;
@@ -133,7 +132,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				isSliding = false;
 				canRun = true;
 			}
-			//m_Camera.transform.position = new Vector3 (m_Camera.transform.position.x,cameraY,m_Camera.transform.position.z);
 		}
 
 		IEnumerator Slide(){
@@ -158,7 +156,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // always move along the camera forward as it is the direction that it's being aimed at
             Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
 
-            // get a normal for the surface that is being touched to move along it
+			// get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
                                m_CharacterController.height/2f);
@@ -182,41 +180,59 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				wallRunTimer = 0;
 			} else if(Left_WallRun == true){
 				if(wallRunTimer < 10f){
-					wallRunTimer = wallRunTimer +0.008f;
+					wallRunTimer = wallRunTimer +0.009f;
 				}
+				//Reset for one more jump off the wall  "JumpCount = 1;"
 				JumpCount = 1;
 				m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
 				m_MoveDir.y =  leftHit.normal.y;
 			
-			//Reset for one more jump off the wall  "JumpCount = 1;"
 			} else if (Right_WallRun == true){
 				if(wallRunTimer < 10f){
-					wallRunTimer = wallRunTimer +0.008f;
+						wallRunTimer = wallRunTimer +0.009f;
 				}
+				//Reset for one more jump off the wall  "JumpCount = 1;"
 				JumpCount = 1;
 				m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
 				m_MoveDir.y =  rightHit.normal.y;
 			}
-
-				m_MoveDir.x = desiredMove.x * speed;
+				m_MoveDir.x = desiredMove.x *speed;
 				m_MoveDir.z = desiredMove.z * speed;
-
+			
 			//Reset Jump Count if Player has hit the ground
 			if (m_CharacterController.isGrounded) {
 				JumpCount = 0;
 			}
 
 			//Check if the Player has jumped less the max jumps allowed (2)
-            if (m_Jump && JumpCount <2 && isSliding == false)
-                {
+            if (m_Jump && JumpCount <2 && isSliding == false){
 				//Check if it is the first or double (second) jump
 				if(m_Jump && JumpCount <1){
+
+					/*Check if the Player is wall running or not
+					if(Left_WallRun == true){
+						m_MoveDir = new Vector3 (transform.right.x +30f,transform.right.y,transform.right.z);
+						Left_WallRun = false;
+						m_MoveDir.y = m_JumpSpeed -4f;
+						PlayJumpSound();
+						m_Jump = false;
+						m_Jumping = true;
+						JumpCount = JumpCount +1;
+					}else if (Right_WallRun == true){
+						Right_WallRun = false;
+						m_MoveDir.y = m_JumpSpeed;
+						PlayJumpSound();
+						m_Jump = false;
+						m_Jumping = true;
+						JumpCount = JumpCount +1;
+					}else{ */
 						m_MoveDir.y = -m_StickToGroundForce;
 						m_MoveDir.y = m_JumpSpeed;
 						PlayJumpSound();
                     	m_Jump = false;
 						m_Jumping = true;
 						JumpCount = JumpCount +1;
+
 				}else{
 						m_MoveDir.y = -m_StickToGroundForce;
 						m_MoveDir.y = m_JumpSpeed -0.6f;
@@ -225,7 +241,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 						m_Jumping = true;
 						JumpCount = JumpCount +1;
 				}
-
 			}else {
 				//Make the player fall back to the ground (Activate Gravity)
 				m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
@@ -313,19 +328,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void GetInput(out float speed)
         {
-            // Read input
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+			// Read input
+			float deadzone = 0.2f;
+			Vector2 stickInput = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
+			if (stickInput.magnitude < deadzone){
+				stickInput = Vector2.zero;
+			}else {
+				stickInput = stickInput.normalized * ((stickInput.magnitude - deadzone) / (1 - deadzone));
+			}
 
             bool waswalking = m_IsWalking;
 
-#if !MOBILE_INPUT
-            // On standalone builds, walk/run speed is modified by a key press.
-            // keep track of whether or not the character is walking or running
+			#if !MOBILE_INPUT
+            // keep track of whether the character is walking or running
             if(Input.GetButton ("Sprint") && m_PreviouslyGrounded == true && canRun ==true){
 				m_IsWalking = false;
-				if(m_RunSpeed <10f){
-					m_RunSpeed = m_RunSpeed +0.1f;
+				if(m_RunSpeed <9.0f && m_Input.y >0){
+					m_RunSpeed = m_RunSpeed +0.15f;
 				}
 			}else{
 				if(m_PreviouslyGrounded == true){
@@ -336,13 +355,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
-            m_Input = new Vector2(horizontal, vertical);
+			if (stickInput.x > 0 && stickInput.y > 0 ||stickInput.x < 0 && stickInput.y < 0 ||
+			    stickInput.x >0 && stickInput.y <0 ||stickInput.x <0 && stickInput.y >0){
+				speed *= stickInput.magnitude/1.4f;
+			} else {
+				speed *= stickInput.magnitude;
+			}
+            m_Input = new Vector2(stickInput.x, stickInput.y);
+			Velocity = m_Input;
 
             // normalize input if it exceeds 1 in combined length:
             if (m_Input.sqrMagnitude > 1)
             {
                 m_Input.Normalize();
             }
+
 
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used

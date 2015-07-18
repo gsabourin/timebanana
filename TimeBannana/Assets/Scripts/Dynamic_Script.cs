@@ -17,8 +17,10 @@ public class Dynamic_Script : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter (Collision other){
-		bulletScript = other.gameObject.GetComponent <Destroy_Bullet> ();
-		timerMultiplier = bulletScript.chargeLevel /2f;
+		if (other.gameObject.tag == ("fastBullet") || other.gameObject.tag == ("slowBullet")) {
+			bulletScript = other.gameObject.GetComponent <Destroy_Bullet> ();
+			timerMultiplier = bulletScript.chargeLevel / 2f;
+		}
 		if (other.gameObject.tag == ("slowBullet")){
 			if(bulletScript.chargeLevel == 20){
 				BlocksAnim.speed = 0.0f;
