@@ -293,6 +293,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             int n = Random.Range(1, m_FootstepSounds.Length);
             m_AudioSource.clip = m_FootstepSounds[n];
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
+
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
@@ -311,6 +312,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Camera.transform.localPosition =
                     m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
                                       (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
+
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
             }
@@ -324,7 +326,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
             m_Camera.transform.localPosition = newCameraPosition;
         }
-
 
         private void GetInput(out float speed)
         {
@@ -369,7 +370,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Input.Normalize();
             }
-
 
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used
