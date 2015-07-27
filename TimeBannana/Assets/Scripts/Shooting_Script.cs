@@ -16,6 +16,7 @@ public class Shooting_Script : MonoBehaviour {
 	private Text timeLock;
 	private bool LtriggerPulled = false;
 	private bool RtriggerPulled = false;
+	public bool TimeLock;
 
 	void Start (){
 		chargeSlider = GameObject.Find ("Charge_Level").GetComponent <Slider>();
@@ -23,10 +24,12 @@ public class Shooting_Script : MonoBehaviour {
 	}
 	void Update () {
 
-		if (chargeLevel == 20) {
+		if (chargeLevel == 20 && Input.GetButton ("F")) {
 			timeLock.color = Color.green;
+			TimeLock = true;
 		} else {
 			timeLock.color = Color.white;
+			TimeLock = false;
 		}
 		chargeSlider.value = chargeLevel;
 
@@ -43,7 +46,7 @@ public class Shooting_Script : MonoBehaviour {
 		}
 		if(Input.GetButtonDown ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==1){
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 1;
+				chargeLevel = chargeLevel + 0.5f;
 			}
 			RtriggerPulled = true;
 		}

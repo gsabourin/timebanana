@@ -235,7 +235,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 				}else{
 						m_MoveDir.y = -m_StickToGroundForce;
-						m_MoveDir.y = m_JumpSpeed -1.3f;
+						m_MoveDir.y = m_JumpSpeed -1.2f;
 						PlayJumpSound();
 						m_Jump = false;
 						m_Jumping = true;
