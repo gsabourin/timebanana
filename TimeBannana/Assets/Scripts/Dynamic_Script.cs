@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Dynamic_Script : MonoBehaviour {
 	
@@ -11,6 +12,8 @@ public class Dynamic_Script : MonoBehaviour {
 	public GameObject Sister_Object;
 	private Animator SisterAnim;
 	private bool Sister;
+	//public Animator[] SisterObjects= new Animator[5];
+
 
 	void Start () {
 		BlocksAnim = gameObject.GetComponent <Animator> ();
