@@ -1,5 +1,5 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-11256
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-8228
 Cmd: getPlatforms
 Cmd: preprocess
   insize=8687 outsize=2135 ok=1
@@ -154,18 +154,26 @@ Cmd: preprocess
 Cmd: preprocess
   insize=5240 outsize=920 ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=8476 outsize=1501 kw=DIRECTIONAL ok=1
+  api=4 type=0 insize=977 outsize=4711 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _EMISSION ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=8476 outsize=2948 kw=DIRECTIONAL ok=1
+  api=4 type=1 insize=977 outsize=11544 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _EMISSION ok=1
 Cmd: compileSnippet
-  api=4 type=2 insize=8476 outsize=7863 kw=DIRECTIONAL ok=1
+  api=4 type=0 insize=977 outsize=4824 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION ok=1
 Cmd: compileSnippet
-  api=4 type=3 insize=8476 outsize=6319 kw=DIRECTIONAL ok=1
+  api=4 type=1 insize=977 outsize=11974 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=8311 outsize=1501 kw=DIRECTIONAL ok=1
+  api=4 type=0 insize=977 outsize=4824 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION VERTEXLIGHT_ON ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=8311 outsize=2948 kw=DIRECTIONAL ok=1
+  api=4 type=0 insize=982 outsize=4824 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 ok=1
 Cmd: compileSnippet
-  api=4 type=2 insize=8311 outsize=7928 kw=DIRECTIONAL ok=1
+  api=4 type=1 insize=982 outsize=11820 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 ok=1
 Cmd: compileSnippet
-  api=4 type=3 insize=8311 outsize=5353 kw=DIRECTIONAL ok=1
+  api=4 type=0 insize=982 outsize=4824 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 VERTEXLIGHT_ON ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=977 outsize=4508 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=977 outsize=11666 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=982 outsize=4824 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=982 outsize=12031 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON FOG_EXP2 _EMISSION ok=1
