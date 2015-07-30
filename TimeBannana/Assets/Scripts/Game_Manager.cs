@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour {
 
@@ -8,14 +9,27 @@ public class Game_Manager : MonoBehaviour {
 	private bool EndGame = false;
 	public Vector3 CheckpointPOS;
 	public bool MustReset = false;
+	public GameObject Pause_Menu;
+	private bool onoff= false;
 
 	void Start () {
 		Player = GameObject.FindWithTag ("Player");
 		CheckpointPOS = Player.transform.position;
+		//Pause_Menu = GameObject.Find("Pause_Menu");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if (Input.GetButtonDown ("ESC")) {
+			onoff = !onoff;
+			Pause_Menu.SetActive (onoff);
+			if(!onoff){
+				Time.timeScale = 1;
+			}else{
+				Time.timeScale = 0;
+			}
+		}
 
 		if (EndGame == true) {
 			Application.LoadLevel ("Prototype");

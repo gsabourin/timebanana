@@ -235,7 +235,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 				}else{
 						m_MoveDir.y = -m_StickToGroundForce;
-						m_MoveDir.y = m_JumpSpeed -1.2f;
+						m_MoveDir.y = m_JumpSpeed -1.25f;
 						PlayJumpSound();
 						m_Jump = false;
 						m_Jumping = true;
@@ -345,7 +345,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(Input.GetButton ("Sprint") && m_PreviouslyGrounded == true && canRun ==true){
 				m_IsWalking = false;
 				if(m_RunSpeed <9.0f && m_Input.y >0){
-					m_RunSpeed = m_RunSpeed +0.15f;
+					m_RunSpeed = m_RunSpeed +0.25f;
 				}
 			}else{
 				if(m_PreviouslyGrounded == true){
