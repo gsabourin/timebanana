@@ -11,7 +11,7 @@ public class Time_Grenade : MonoBehaviour {
 
 
 	void Start (){
-		Image_Post_Proccess = GameObject.Find ("Panel").GetComponent <Image>();
+		Image_Post_Proccess = GameObject.Find ("Time_Grenade_PP").GetComponent <Image>();
 	}
 	void Update () {
 		float offset = Time.time * scrollSpeed;

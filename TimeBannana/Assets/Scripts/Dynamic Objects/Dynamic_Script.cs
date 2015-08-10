@@ -32,22 +32,13 @@ public class Dynamic_Script : MonoBehaviour {
 			timerMultiplier = bulletScript.chargeLevel / 2f;
 		}
 		if (other.gameObject.tag == ("slowBullet")){
-			if(bulletScript.chargeLevel == 20 && bulletScript.TimeLock == true){
-				if(Sister == true){
-					BlocksAnim.speed = 0.0f;
-					SisterAnim.speed = 0.0f;
-				}else{
-					BlocksAnim.speed = 0.0f;
-				}
-			}else{
 				if(Sister == true){
 					BlocksAnim.speed = 0.025f;
 					SisterAnim.speed = 0.025f;
 				}else{
 					BlocksAnim.speed = 0.025f;
-				}			}
+				}			
 			StartCoroutine (DelaySlow());
-
 		}
 		if (other.gameObject.tag == ("fastBullet")){
 			if(Sister == true){
@@ -62,26 +53,22 @@ public class Dynamic_Script : MonoBehaviour {
 	
 	IEnumerator  DelaySlow(){
 		yield return new WaitForSeconds (1.0f *timerMultiplier +1f);
-		if (bulletScript.chargeLevel == 20f && bulletScript.TimeLock == true) {
-		} else {
+
 			if(Sister == true){
 				BlocksAnim.speed = 1.0f;
 				SisterAnim.speed = 1.0f;
 			}else{
 				BlocksAnim.speed = 1.0f;
 			}
-		}
 	}
 	IEnumerator  DelayFast(){
 		yield return new WaitForSeconds (1.0f * timerMultiplier +1f);
-		if (bulletScript.chargeLevel == 20f && bulletScript.TimeLock == true) {
-		} else {
+
 			if(Sister == true){
 				BlocksAnim.speed = 1.0f;
 				SisterAnim.speed = 1.0f;
 			}else{
 				BlocksAnim.speed = 1.0f;
 			}
-		}
 	}
 }

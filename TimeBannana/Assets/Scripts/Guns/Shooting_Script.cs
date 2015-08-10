@@ -16,21 +16,12 @@ public class Shooting_Script : MonoBehaviour {
 	private Text timeLock;
 	private bool LtriggerPulled = false;
 	private bool RtriggerPulled = false;
-	public bool TimeLock;
 
 	void Start (){
 		chargeSlider = GameObject.Find ("Charge_Level").GetComponent <Slider>();
-		timeLock = GameObject.Find ("Time_Lock").GetComponent <Text>();
 	}
 	void Update () {
 
-		if (chargeLevel == 20 && Input.GetButton ("F")) {
-			timeLock.color = Color.green;
-			TimeLock = true;
-		} else {
-			timeLock.color = Color.white;
-			TimeLock = false;
-		}
 		chargeSlider.value = chargeLevel;
 
 		if (Input.GetButtonUp ("RB")) {

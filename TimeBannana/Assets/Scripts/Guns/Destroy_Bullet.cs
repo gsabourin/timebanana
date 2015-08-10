@@ -7,8 +7,6 @@ public class Destroy_Bullet : MonoBehaviour {
 	private Shooting_Script shootScript;
 	public float chargeLevel;
 	private ParticleSystem particles;
-	public bool TimeLock;
-
 
 	// Use this for initialization
 	void Start () {
@@ -16,9 +14,6 @@ public class Destroy_Bullet : MonoBehaviour {
 		shootScript = GameObject.Find ("SpawnPoint").GetComponent <Shooting_Script> ();
 		chargeLevel = shootScript.chargeLevel;
 		particles = gameObject.GetComponent <ParticleSystem> ();
-		if (shootScript.TimeLock == true) {
-			TimeLock = shootScript.TimeLock;
-		}
 
 		//gameObject.transform.localScale = new Vector3 (0.3f *chargeLevel *0.05f,0.3f *chargeLevel *0.05f,0.3f *chargeLevel *0.05f);
 	}
