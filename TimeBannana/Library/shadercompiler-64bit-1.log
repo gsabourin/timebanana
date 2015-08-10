@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 Base path: C:/Program Files/Unity/Editor/Data
 Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-5624
 Cmd: getPlatforms
@@ -169,3 +170,8 @@ Unhandled exception: Readfile from pipe failed. GLE=The pipe has been ended.
 
 
 Quitting shader compiler process
+=======
+Base path: /Applications/Unity/Unity.app/Contents
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-1941508864
+Cmd: getPlatforms
+>>>>>>> Stashed changes

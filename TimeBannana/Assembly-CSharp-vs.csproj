@@ -47,16 +47,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Character\Clamber.cs" />
-     <Compile Include="Assets\Scripts\Checkpoint.cs" />
-     <Compile Include="Assets\Scripts\Door_Drop_Script.cs" />
      <Compile Include="Assets\Scripts\Dynamic Objects\Dynamic_Script.cs" />
      <Compile Include="Assets\Scripts\Dynamic Objects\Machine_Trigger.cs" />
      <Compile Include="Assets\Scripts\Dynamic Objects\Player_Trigger.cs" />
-     <Compile Include="Assets\Scripts\Game_Manager.cs" />
+     <Compile Include="Assets\Scripts\Game Managing Scripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\Game Managing Scripts\Game_Manager.cs" />
      <Compile Include="Assets\Scripts\Guns\Destroy_Bullet.cs" />
      <Compile Include="Assets\Scripts\Guns\Shooting_Script.cs" />
      <Compile Include="Assets\Scripts\Guns\Time_Grenade.cs" />
-     <Compile Include="Assets\Scripts\Material_Fade_Script.cs" />
+     <Compile Include="Assets\Scripts\MISC\Door_Drop_Script.cs" />
+     <Compile Include="Assets\Scripts\MISC\Material_Fade_Script.cs" />
+     <Compile Include="Assets\Scripts\UI\HUD.cs" />
      <Compile Include="Assets\Scripts\UI\Menu_Script.cs" />
      <Compile Include="Assets\Tech Assets\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
      <Compile Include="Assets\Tech Assets\Standard Assets\Cameras\Scripts\AutoCam.cs" />
