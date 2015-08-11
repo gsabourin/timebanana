@@ -19,8 +19,8 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		time += Time.time;
-		timeText.text = ("Time:" + time.ToString("F2"));
+		//time += Time.time;
+		//timeText.text = ("Time:" + time.ToString("F2"));
 
 	}
 }

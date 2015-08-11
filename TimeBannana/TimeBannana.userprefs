@@ -1,12 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/HUD.cs">
     <Files>
-      <File FileName="Assets/Scripts/Game Managing Scripts/Game_Manager.cs" Line="12" Column="1" />
-      <File FileName="Assets/Scripts/UI/HUD.cs" Line="21" Column="31" />
-      <File FileName="Assets/Scripts/Guns/Shooting_Script.cs" Line="22" Column="1" />
-      <File FileName="Assets/Scripts/Guns/Destroy_Bullet.cs" Line="9" Column="35" />
-      <File FileName="Assets/Scripts/Dynamic Objects/Dynamic_Script.cs" Line="42" Column="4" />
+      <File FileName="Assets/Scripts/UI/HUD.cs" Line="23" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
