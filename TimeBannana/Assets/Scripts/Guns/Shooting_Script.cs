@@ -31,13 +31,13 @@ public class Shooting_Script : MonoBehaviour {
 
 		if (Input.GetButtonDown ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==1) {
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 0.5f;
+				chargeLevel = chargeLevel + 0.4f;
 			}
 			LtriggerPulled = true;
 		}
 		if(Input.GetButtonDown ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==1){
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 0.5f;
+				chargeLevel = chargeLevel + 0.4f;
 			}
 			RtriggerPulled = true;
 		}

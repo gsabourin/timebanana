@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-namespace UnityStandardAssets.ImageEffects
-{
     [ExecuteInEditMode]
     [RequireComponent (typeof(Camera))]
     [AddComponentMenu ("Image Effects/Blur/Blur (Optimized)")]
@@ -90,4 +88,3 @@ namespace UnityStandardAssets.ImageEffects
             RenderTexture.ReleaseTemporary (rt);
         }
     }
-}

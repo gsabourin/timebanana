@@ -5,8 +5,6 @@ using UnityStandardAssets.Utility;
 using System.Collections;
 using Random = UnityEngine.Random;
 
-namespace UnityStandardAssets.Characters.FirstPerson
-{
     [RequireComponent(typeof (CharacterController))]
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
@@ -18,7 +16,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
-        [SerializeField] private MouseLook m_MouseLook;
+        [SerializeField] public MouseLook m_MouseLook;
         [SerializeField] private bool m_UseFovKick;
         [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
@@ -53,6 +51,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private float crouchCounter;
 		public Vector2 Velocity;
 		private float wallRunTimer =0F;
+		private bool hasWallRun = false;
+		private bool canRay = true;
 
 		// Use this for initialization
         private void Start()
@@ -162,15 +162,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
                                m_CharacterController.height/2f);
 			//Check for a left side Wall
 			RaycastHit leftHit;
-			if (Physics.Raycast (transform.position,-transform.right, out leftHit, 0.8f) && m_CharacterController.isGrounded == false) {
+			if (Physics.Raycast (transform.position,-transform.right, out leftHit, 0.6f) && m_CharacterController.isGrounded == false && canRay == true
+		    ) {
 				Left_WallRun = true;
+				hasWallRun = true;
 			} else{
 				Left_WallRun = false;
 			}
 			//Check for a right side Wall
 			RaycastHit rightHit;
-			if (Physics.Raycast (transform.position,transform.right, out rightHit, 0.8f) && m_CharacterController.isGrounded == false) {
+		if (Physics.Raycast (transform.position,transform.right, out rightHit, 0.6f) && m_CharacterController.isGrounded == false && canRay == true) {
 				Right_WallRun = true;
+				hasWallRun = true;
 			} else {
 				Right_WallRun = false;
 			}
@@ -201,31 +204,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			
 			//Reset Jump Count if Player has hit the ground
 			if (m_CharacterController.isGrounded) {
+				hasWallRun = false;
 				JumpCount = 0;
+			}
+			if (m_Jump && hasWallRun == true) {
+				canRay = false;
+				StartCoroutine (waitRay());
 			}
 
 			//Check if the Player has jumped less the max jumps allowed (2)
             if (m_Jump && JumpCount <2 && isSliding == false){
 				//Check if it is the first or double (second) jump
 				if(m_Jump && JumpCount <1){
-
-					/*Check if the Player is wall running or not
-					if(Left_WallRun == true){
-						m_MoveDir = new Vector3 (transform.right.x +30f,transform.right.y,transform.right.z);
-						Left_WallRun = false;
-						m_MoveDir.y = m_JumpSpeed -4f;
-						PlayJumpSound();
-						m_Jump = false;
-						m_Jumping = true;
-						JumpCount = JumpCount +1;
-					}else if (Right_WallRun == true){
-						Right_WallRun = false;
-						m_MoveDir.y = m_JumpSpeed;
-						PlayJumpSound();
-						m_Jump = false;
-						m_Jumping = true;
-						JumpCount = JumpCount +1;
-					}else{ */
 						m_MoveDir.y = -m_StickToGroundForce;
 						m_MoveDir.y = m_JumpSpeed;
 						PlayJumpSound();
@@ -256,6 +246,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCameraPosition(speed);
         }
 
+
+		IEnumerator waitRay (){
+			yield return new WaitForSeconds (0.8f);
+			canRay = true;
+
+		}
 
         private void PlayJumpSound()
         {
@@ -402,4 +398,3 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
     }
-}

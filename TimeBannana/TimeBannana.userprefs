@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/HUD.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Guns/Destroy_Bullet.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/HUD.cs" Line="23" Column="5" />
+      <File FileName="Assets/Scripts/UI/HUD.cs" Line="27" Column="1" />
+      <File FileName="Assets/Scripts/Guns/Shooting_Script.cs" Line="77" Column="3" />
+      <File FileName="Assets/Scripts/Guns/Destroy_Bullet.cs" Line="35" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
