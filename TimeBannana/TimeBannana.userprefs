@@ -1,10 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Guns/Destroy_Bullet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Dynamic Objects/Dynamic_Script.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/HUD.cs" Line="27" Column="1" />
-      <File FileName="Assets/Scripts/Guns/Shooting_Script.cs" Line="77" Column="3" />
-      <File FileName="Assets/Scripts/Guns/Destroy_Bullet.cs" Line="35" Column="2" />
+      <File FileName="Assets/Scripts/UI/HUD.cs" Line="43" Column="32" />
+      <File FileName="Assets/Scripts/Guns/Shooting_Script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Guns/Destroy_Bullet.cs" Line="18" Column="3" />
+      <File FileName="Assets/Scripts/UI/Menu_Script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game Managing Scripts/Game_Manager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Tech Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Tech Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/MouseLook.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game Managing Scripts/Checkpoint.cs" Line="1" Column="1" />
+      <File FileName="Assets/Tech Assets/Standard Assets/Effects/ImageEffects/Scripts/BlurOptimized.cs" Line="1" Column="1" />
+      <File FileName="Assets/Tech Assets/Standard Assets/Effects/ImageEffects/Scripts/PostEffectsBase.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Dynamic Objects/Dynamic_Script.cs" Line="14" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

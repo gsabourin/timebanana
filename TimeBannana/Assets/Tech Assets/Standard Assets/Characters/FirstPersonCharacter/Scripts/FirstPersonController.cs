@@ -52,6 +52,7 @@ using Random = UnityEngine.Random;
 		public Vector2 Velocity;
 		private float wallRunTimer =0F;
 		private bool hasWallRun = false;
+		private bool hasJumped = false;
 		private bool canRay = true;
 
 		// Use this for initialization
@@ -185,8 +186,6 @@ using Random = UnityEngine.Random;
 				if(wallRunTimer < 10f){
 					wallRunTimer = wallRunTimer +0.009f;
 				}
-				//Reset for one more jump off the wall  "JumpCount = 1;"
-				JumpCount = 1;
 				m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
 				m_MoveDir.y =  leftHit.normal.y;
 			
@@ -194,21 +193,25 @@ using Random = UnityEngine.Random;
 				if(wallRunTimer < 10f){
 						wallRunTimer = wallRunTimer +0.009f;
 				}
-				//Reset for one more jump off the wall  "JumpCount = 1;"
-				JumpCount = 1;
 				m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
 				m_MoveDir.y =  rightHit.normal.y;
 			}
 				m_MoveDir.x = desiredMove.x *speed;
 				m_MoveDir.z = desiredMove.z * speed;
 			
+			if (hasWallRun && !hasJumped) {
+				JumpCount = 1;
+			}
 			//Reset Jump Count if Player has hit the ground
 			if (m_CharacterController.isGrounded) {
 				hasWallRun = false;
+				hasJumped = false;
 				JumpCount = 0;
 			}
+
 			if (m_Jump && hasWallRun == true) {
 				canRay = false;
+				hasJumped = true;
 				StartCoroutine (waitRay());
 			}
 
@@ -250,7 +253,6 @@ using Random = UnityEngine.Random;
 		IEnumerator waitRay (){
 			yield return new WaitForSeconds (0.8f);
 			canRay = true;
-
 		}
 
         private void PlayJumpSound()

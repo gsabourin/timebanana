@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Guns\Shooting_Script.cs" />
      <Compile Include="Assets\Scripts\Guns\Time_Grenade.cs" />
      <Compile Include="Assets\Scripts\MISC\Door_Drop_Script.cs" />
+     <Compile Include="Assets\Scripts\MISC\Mat_Change_When_Hit.cs" />
      <Compile Include="Assets\Scripts\MISC\Material_Fade_Script.cs" />
      <Compile Include="Assets\Scripts\UI\HUD.cs" />
      <Compile Include="Assets\Scripts\UI\Menu_Script.cs" />
