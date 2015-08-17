@@ -3,6 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 public class Menu_Script : MonoBehaviour {
 
+	private HUD hudScript;
+
+	void Start(){
+		hudScript = GameObject.Find ("UI").GetComponent<HUD> ();
+	}
+	public void Continue(){
+		hudScript.onoff = false;
+		hudScript.onoffOpp = true;
+
+	}
+
 	public void OpenTutorial (){
 		Application.LoadLevel("Tutorial");
 	}

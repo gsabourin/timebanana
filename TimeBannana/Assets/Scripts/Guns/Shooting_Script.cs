@@ -21,9 +21,6 @@ public class Shooting_Script : MonoBehaviour {
 		chargeSlider = GameObject.Find ("Charge_Level").GetComponent <Slider>();
 	}
 	void Update () {
-
-		chargeSlider.value = chargeLevel;
-
 		if (Input.GetButtonUp ("RB")) {
 			Rigidbody grenade = Instantiate(Grenade,transform.position,transform.rotation) as Rigidbody;
 			grenade.velocity = transform.TransformDirection (new Vector3(0,0,GSpeed));
@@ -31,16 +28,18 @@ public class Shooting_Script : MonoBehaviour {
 
 		if (Input.GetButtonDown ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==1) {
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 0.4f;
+				chargeLevel = chargeLevel + 0.425f;
 			}
 			LtriggerPulled = true;
 		}
 		if(Input.GetButtonDown ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==1){
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 0.4f;
+				chargeLevel = chargeLevel + 0.425f;
 			}
 			RtriggerPulled = true;
 		}
+		chargeSlider.value = chargeLevel;
+
 
 	//Check for a LEFT click or Right trigger pull to shoot the SLOW pulse
 		if(Input.GetButtonUp ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==-1 && LtriggerPulled == true && canShootSlow == true){

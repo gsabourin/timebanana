@@ -91,8 +91,8 @@ public class Dynamic_Script : MonoBehaviour {
 	
 	IEnumerator  DelaySlow(){
 		yield return new WaitForSeconds (1.0f *timerMultiplier +1f);
-
-			if(Sister == true){
+			
+		if(Sister == true){
 				BlocksAnim.speed = 1.0f;
 				SisterAnim.speed = 1.0f;
 			}else{

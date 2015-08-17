@@ -13,9 +13,10 @@ public class Destroy_Bullet : MonoBehaviour {
 		Projectile = gameObject;
 		shootScript = GameObject.Find ("SpawnPoint").GetComponent <Shooting_Script> ();
 		chargeLevel = shootScript.chargeLevel;
+		StartCoroutine (Wait ());
 		//particles = gameObject.GetComponent <ParticleSystem> ();
 
-		gameObject.transform.localScale = new Vector3 (0.3f *chargeLevel *0.05f,0.3f *chargeLevel *0.05f,0.3f *chargeLevel *0.05f);
+		//gameObject.transform.localScale = new Vector3 (0.3f *chargeLevel *0.05f,0.3f *chargeLevel *0.05f,0.3f *chargeLevel *0.05f);
 	}
 	void OnCollisionEnter (Collision other){
 		if (other.gameObject.tag == ("Player")) {
@@ -28,7 +29,7 @@ public class Destroy_Bullet : MonoBehaviour {
 	}
 
 	 IEnumerator Wait(){
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (10f);
 		//particles.Play (false);
 		Destroy (Projectile);
 	}
