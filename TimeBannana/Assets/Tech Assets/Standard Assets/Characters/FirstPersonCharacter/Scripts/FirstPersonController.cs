@@ -214,6 +214,7 @@ using Random = UnityEngine.Random;
 			if (m_Jump && hasWallRun == true) {
 				canRay = false;
 				hasJumped = true;
+				hasWallRun = false;
 				StartCoroutine (waitRay());
 			}
 
