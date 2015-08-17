@@ -11,7 +11,6 @@ public class Menu_Script : MonoBehaviour {
 	public void Continue(){
 		hudScript.onoff = false;
 		hudScript.onoffOpp = true;
-
 	}
 
 	public void OpenTutorial (){

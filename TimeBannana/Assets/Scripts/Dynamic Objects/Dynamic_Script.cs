@@ -64,7 +64,11 @@ public class Dynamic_Script : MonoBehaviour {
 			timerMultiplier = bulletScript.chargeLevel / 2f;
 		}
 		if (other.gameObject.tag == ("slowBullet")){
-				if(Sister == true){
+			if(isSpeeding){
+				StopCoroutine (DelayFast());
+				isSpeeding = false;
+			}	
+			if(Sister == true){
 					BlocksAnim.speed = 0.025f;
 					SisterAnim.speed = 0.025f;
 					//sisMatRenderer.material = hitSlow;
@@ -73,10 +77,15 @@ public class Dynamic_Script : MonoBehaviour {
 				}
 			//matRenderer.material = hitSlow;
 			//isHit = true;
+
 			StartCoroutine (DelaySlow());
 		}
 		if (other.gameObject.tag == ("fastBullet")){
-				if(Sister == true){
+			if(isSlowing){
+				StopCoroutine (DelaySlow());
+				isSlowing = false;
+			}	
+			if(Sister == true){
 					BlocksAnim.speed = 2.0f;
 					SisterAnim.speed = 2.0f;
 					//sisMatRenderer.material = hitFast;

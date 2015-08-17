@@ -38,14 +38,15 @@ public class HUD : MonoBehaviour {
 		if (Input.GetButtonDown ("ESC")) {
 			onoff = !onoff;
 			onoffOpp = !onoffOpp;
-			Pause_Menu.SetActive (onoff);
-			blurScript.enabled = onoff;
-			hudPanel.SetActive (onoffOpp);
-			if(!onoff){
-				Time.timeScale = 1;
-			}else{
-				Time.timeScale = 0;
-			}
+		}
+
+		Pause_Menu.SetActive (onoff);
+		blurScript.enabled = onoff;
+		hudPanel.SetActive (onoffOpp);
+		if(!onoff){
+			Time.timeScale = 1;
+		}else{
+			Time.timeScale = 0;
 		}
 
 		timer += Time.deltaTime;
