@@ -181,20 +181,21 @@ using Random = UnityEngine.Random;
 
 			if (Left_WallRun == false && Right_WallRun == false) {
 				desiredMove = Vector3.ProjectOnPlane (desiredMove, hitInfo.normal).normalized;
+				hasJumped = false;
 				wallRunTimer = 0;
 			} else if(Left_WallRun == true){
-				if(wallRunTimer < 10f){
-					wallRunTimer = wallRunTimer +0.009f;
-				}
-				m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
-				m_MoveDir.y =  leftHit.normal.y;
+					if(wallRunTimer < 10f){
+						wallRunTimer = wallRunTimer +0.009f;
+					}
+						m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
+						m_MoveDir.y =  leftHit.normal.y;
 			
 			} else if (Right_WallRun == true){
 				if(wallRunTimer < 10f){
 						wallRunTimer = wallRunTimer +0.009f;
 				}
-				m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
-				m_MoveDir.y =  rightHit.normal.y;
+					m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
+					m_MoveDir.y =  rightHit.normal.y;
 			}
 				m_MoveDir.x = desiredMove.x *speed;
 				m_MoveDir.z = desiredMove.z * speed;
@@ -207,6 +208,7 @@ using Random = UnityEngine.Random;
 				hasWallRun = false;
 				hasJumped = false;
 				JumpCount = 0;
+				canRay = true;
 			}
 
 			if (m_Jump && hasWallRun == true) {
