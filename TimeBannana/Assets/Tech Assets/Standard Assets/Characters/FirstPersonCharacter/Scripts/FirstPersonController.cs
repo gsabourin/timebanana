@@ -54,7 +54,11 @@ using Random = UnityEngine.Random;
 		private bool hasWallRun = false;
 		private bool hasJumped = false;
 		private bool canRay = true;
-
+		private GameObject cameraHolder;
+		private Quaternion camRotate;
+		//private bool canROT = true;
+		[HideInInspector]public Quaternion originalCamHolderROT;
+		
 		// Use this for initialization
         private void Start()
         {
@@ -70,6 +74,8 @@ using Random = UnityEngine.Random;
 			m_MouseLook.Init(transform , m_Camera.transform);
 			playerSize = m_CharacterController.height;
 			m_CollisionTrig = GetComponent<CapsuleCollider>();
+			cameraHolder = GameObject.Find ("Camera_Holder");	
+			originalCamHolderROT = cameraHolder.transform.rotation;
 		}
 		
 		// Update is called once per frame
@@ -180,6 +186,11 @@ using Random = UnityEngine.Random;
 			}
 
 			if (Left_WallRun == false && Right_WallRun == false) {
+			/*if(canROT == false){
+				cameraHolder.transform.rotation = Quaternion.Slerp(cameraHolder.transform.rotation,m_CharacterController.transform.rotation,Time.time * 2); 
+				canROT = true;
+			}
+			*/
 				desiredMove = Vector3.ProjectOnPlane (desiredMove, hitInfo.normal).normalized;
 				hasJumped = false;
 				wallRunTimer = 0;
@@ -187,6 +198,12 @@ using Random = UnityEngine.Random;
 					if(wallRunTimer < 10f){
 						wallRunTimer = wallRunTimer +0.009f;
 					}
+			/*camRotate = new Quaternion(cameraHolder.transform.rotation.x,cameraHolder.transform.rotation.y,-10f,cameraHolder.transform.rotation.w);
+						if (canROT == true) {
+							cameraHolder.transform.rotation = Quaternion.Slerp(cameraHolder.transform.rotation,camRotate,Time.deltaTime *0.1f);
+							canROT = false;
+						}
+			*/
 						m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
 						m_MoveDir.y =  leftHit.normal.y;
 			
@@ -194,12 +211,18 @@ using Random = UnityEngine.Random;
 				if(wallRunTimer < 10f){
 						wallRunTimer = wallRunTimer +0.009f;
 				}
+			/*camRotate = new Quaternion(cameraHolder.transform.rotation.x,cameraHolder.transform.rotation.y,10f,cameraHolder.transform.rotation.w);
+					if (canROT == true) {
+						cameraHolder.transform.rotation = Quaternion.Slerp(cameraHolder.transform.rotation,camRotate,Time.deltaTime *0.5f);
+						canROT = false;
+					}	
+			*/
 					m_CharacterController.Move (new Vector3(0f,-wallRunTimer/10f,0f));
 					m_MoveDir.y =  rightHit.normal.y;
 			}
 				m_MoveDir.x = desiredMove.x *speed;
 				m_MoveDir.z = desiredMove.z * speed;
-			
+
 			if (hasWallRun && !hasJumped) {
 				JumpCount = 1;
 			}
@@ -256,6 +279,10 @@ using Random = UnityEngine.Random;
 		IEnumerator waitRay (){
 			yield return new WaitForSeconds (0.8f);
 			canRay = true;
+		}
+
+		void actionCamRot (){
+
 		}
 
         private void PlayJumpSound()
