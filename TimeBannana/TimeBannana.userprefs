@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/Drag_With_Mouse.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Echo/Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/Drag_With_Mouse.cs" Line="19" Column="2" />
-      <File FileName="Assets/Tech Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="59" Column="5" />
-      <File FileName="Assets/Scripts/UI/Menu_Script.cs" Line="9" Column="1" />
+      <File FileName="../../Echo/Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="305" Column="91" />
+      <File FileName="../../Echo/Assets/Tech Assets/Scripts/Shooting_Script.cs" Line="38" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
