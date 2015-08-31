@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Game_Manager : MonoBehaviour {
 
@@ -9,12 +10,13 @@ public class Game_Manager : MonoBehaviour {
 	private bool EndGame = false;
 	public Vector3 CheckpointPOS;
 	public bool MustReset = false;
-
+	public List<GameObject>  CheckList;
 
 	void Start () {
 		Player = GameObject.FindWithTag ("Player");
 		CheckpointPOS = Player.transform.position;
 		//Pause_Menu = GameObject.Find("Pause_Menu");
+		CheckList.AddRange (GameObject.FindGameObjectsWithTag ("Checkpoint"));
 	}
 	
 	// Update is called once per frame

@@ -10,8 +10,8 @@ using Random = UnityEngine.Random;
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool m_IsWalking;
-        [SerializeField] private float m_WalkSpeed;
-        [SerializeField] private float m_RunSpeed;
+     					 public float m_WalkSpeed =5;
+        				 public float m_RunSpeed = 6;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -31,8 +31,8 @@ using Random = UnityEngine.Random;
         private bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
-        private Vector3 m_MoveDir = Vector3.zero;
-        private CharacterController m_CharacterController;
+        public Vector3 m_MoveDir = Vector3.zero;
+        public CharacterController m_CharacterController;
         private CollisionFlags m_CollisionFlags;
         private bool m_PreviouslyGrounded;
         private Vector3 m_OriginalCameraPosition;
@@ -58,7 +58,9 @@ using Random = UnityEngine.Random;
 		private Quaternion camRotate;
 		//private bool canROT = true;
 		[HideInInspector]public Quaternion originalCamHolderROT;
-		
+		[HideInInspector]public bool useGravity= true;
+		[HideInInspector]public bool hasSprinted = false;
+
 		// Use this for initialization
         private void Start()
         {
@@ -135,9 +137,9 @@ using Random = UnityEngine.Random;
 				if(playerSize <1.8f){
 					playerSize = playerSize +0.25f;
 				}else{}
-				m_WalkSpeed = 5f;
-				isSliding = false;
-				canRun = true;
+					m_WalkSpeed = 5f;
+					isSliding = false;
+					canRun = true;
 			}
 		}
 
@@ -150,7 +152,7 @@ using Random = UnityEngine.Random;
         {
             m_AudioSource.clip = m_LandSound;
             m_AudioSource.Play();
-            m_NextStep = m_StepCycle + .5f;
+            m_NextStep = m_StepCycle + 0.5f;
         }
 
         private void FixedUpdate()
@@ -165,12 +167,13 @@ using Random = UnityEngine.Random;
 
 			// get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
-            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+           	Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
                                m_CharacterController.height/2f);
 			//Check for a left side Wall
 			RaycastHit leftHit;
-			if (Physics.Raycast (transform.position,-transform.right, out leftHit, 0.6f) && m_CharacterController.isGrounded == false && canRay == true
-		    ) {
+			if (Physics.Raycast (transform.position,-transform.right, out leftHit, 0.6f)
+		  	 	&& m_CharacterController.isGrounded == false && canRay == true) 
+			{
 				Left_WallRun = true;
 				hasWallRun = true;
 			} else{
@@ -178,7 +181,9 @@ using Random = UnityEngine.Random;
 			}
 			//Check for a right side Wall
 			RaycastHit rightHit;
-		if (Physics.Raycast (transform.position,transform.right, out rightHit, 0.6f) && m_CharacterController.isGrounded == false && canRay == true) {
+			if (Physics.Raycast (transform.position,transform.right, out rightHit, 0.6f) 
+		    	&& m_CharacterController.isGrounded == false && canRay == true) 
+			{
 				Right_WallRun = true;
 				hasWallRun = true;
 			} else {
@@ -221,17 +226,30 @@ using Random = UnityEngine.Random;
 					m_MoveDir.y =  rightHit.normal.y;
 			}
 				m_MoveDir.x = desiredMove.x *speed;
-				m_MoveDir.z = desiredMove.z * speed;
+				m_MoveDir.z = desiredMove.z *speed;
+			
+			/*Check if the player is on a sliding platform and make them parents- 
+			of eachother so the player moves with the platform in a natural way*/
+			if (m_PreviouslyGrounded && Input.GetAxis ("Vertical") == 0 || Input.GetAxis ("Horizontal") == 0 && !m_Jumping) {
+			if(hitInfo.collider == null){
 
+			}else{
+			if(hitInfo.collider.tag ==("Sliding")){		
+					gameObject.transform.parent = hitInfo.collider.gameObject.transform;
+				}
+			}
+			} else {
+					gameObject.transform.parent = null; 
+			}
 			if (hasWallRun && !hasJumped) {
 				JumpCount = 1;
 			}
 			//Reset Jump Count if Player has hit the ground
 			if (m_CharacterController.isGrounded) {
-				hasWallRun = false;
-				hasJumped = false;
-				JumpCount = 0;
-				canRay = true;
+			hasWallRun = false;
+			hasJumped = false;
+			JumpCount = 0;
+			canRay = true;
 			}
 
 			if (m_Jump && hasWallRun == true) {
@@ -261,9 +279,16 @@ using Random = UnityEngine.Random;
 						JumpCount = JumpCount +1;
 				}
 			}else {
-				//Make the player fall back to the ground (Activate Gravity)
-				m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
-				m_Jump = false;
+				//Check to use gravity or turn it off for Clamber
+				if(useGravity == true){
+					//Make the player fall back to the ground (Activate Gravity)
+					m_MoveDir.y += Physics.gravity.y*m_GravityMultiplier*Time.fixedDeltaTime;
+					m_Jump = false;
+				}else{
+					//m_Jump = false;
+					m_MoveDir.y += -0.1f;
+
+				}
             }
 			//Initiate a slide if the requirments are met...(i.e. speed, crouch, etc)
 			if (isSliding == false) {
@@ -279,10 +304,6 @@ using Random = UnityEngine.Random;
 		IEnumerator waitRay (){
 			yield return new WaitForSeconds (0.8f);
 			canRay = true;
-		}
-
-		void actionCamRot (){
-
 		}
 
         private void PlayJumpSound()
@@ -375,8 +396,10 @@ using Random = UnityEngine.Random;
 				if(m_RunSpeed <9.0f && m_Input.y >0){
 					m_RunSpeed = m_RunSpeed +0.25f;
 				}
-			}else{
+				hasSprinted = true;
+			}else if(Input.GetAxis ("Vertical")==0 ||isSliding){
 				if(m_PreviouslyGrounded == true){
+					hasSprinted = false;
 					m_IsWalking = true;
 					m_RunSpeed =6f;
 				}
@@ -416,7 +439,8 @@ using Random = UnityEngine.Random;
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            Rigidbody body = hit.collider.attachedRigidbody;
+			Rigidbody body = gameObject.GetComponent<Rigidbody>();
+
 			if (hit.collider.tag == "moveableObject") {
 				
 			}
@@ -430,6 +454,6 @@ using Random = UnityEngine.Random;
             {
                 return;
             }
-            body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+           // body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
     }

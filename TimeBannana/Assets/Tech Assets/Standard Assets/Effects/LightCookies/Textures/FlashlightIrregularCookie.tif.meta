@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 641bb2dce818a8a499b537a1963889ac
+timeCreated: 1440987176
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -9,7 +11,7 @@ TextureImporter:
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
-    borderMipMap: 1
+    borderMipMap: 0
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -43,26 +45,27 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 0
-  textureType: 5
+  textureType: 0
   buildTargetSettings:
   - buildTarget: iPhone
     maxTextureSize: 128
-    textureFormat: 33
+    textureFormat: -1
     compressionQuality: 50
   - buildTarget: Android
     maxTextureSize: 128
-    textureFormat: 13
+    textureFormat: -1
     compressionQuality: 50
   - buildTarget: BlackBerry
     maxTextureSize: 128
-    textureFormat: 13
+    textureFormat: -1
     compressionQuality: 50
   - buildTarget: WP8
     maxTextureSize: 128
-    textureFormat: 12
+    textureFormat: -1
     compressionQuality: 50
   spriteSheet:
     sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
+  assetBundleVariant: 

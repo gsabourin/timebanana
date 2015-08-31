@@ -10,7 +10,6 @@ public class HUD : MonoBehaviour {
 	private int Minutes;
 	private Text timeText;
 
-	private Slider currentSlide;
 	private Slider ghostSlider;
 	
 	private FirstPersonController playerScript;
@@ -29,6 +28,7 @@ public class HUD : MonoBehaviour {
 		timeText = Timer.GetComponent <Text> ();
 		playerScript = GameObject.FindWithTag ("Player").GetComponent<FirstPersonController> ();
 		blurScript = GameObject.Find ("FirstPersonCharacter").GetComponent<BlurOptimized> ();
+		ghostSlider = GameObject.Find ("Ghost_Slider").GetComponent<Slider>();
 		hudPanel = GameObject.Find ("HUD");
 	}
 	

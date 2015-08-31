@@ -21,20 +21,21 @@ public class Shooting_Script : MonoBehaviour {
 		chargeSlider = GameObject.Find ("Charge_Level").GetComponent <Slider>();
 	}
 	void Update () {
-		if (Input.GetButtonUp ("RB")) {
+		/*if (Input.GetButtonUp ("RB")) {
 			Rigidbody grenade = Instantiate(Grenade,transform.position,transform.rotation) as Rigidbody;
 			grenade.velocity = transform.TransformDirection (new Vector3(0,0,GSpeed));
 		}
+		*/
 
 		if (Input.GetButtonDown ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==1) {
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 0.425f;
+				chargeLevel = chargeLevel + 0.5f;
 			}
 			LtriggerPulled = true;
 		}
 		if(Input.GetButtonDown ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==1){
 			if (chargeLevel < 20f) {
-				chargeLevel = chargeLevel + 0.425f;
+				chargeLevel = chargeLevel + 0.5f;
 			}
 			RtriggerPulled = true;
 		}

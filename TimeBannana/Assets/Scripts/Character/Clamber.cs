@@ -4,28 +4,42 @@ using System.Collections;
 public class Clamber : MonoBehaviour {
 
 
-	private GameObject LedgeOBJ;
 	private GameObject Player;
-	private Vector3 Intermediate;
-	private Vector3 Landing;
+	private FirstPersonController playerController;
+
+	//private GameObject LedgeOBJ;
+	//private Vector3 Intermediate;
+	//private Vector3 Landing;
 
 	void Start () {
 
-		Player = GameObject.Find ("Player_NEW");
-		LedgeOBJ = gameObject;
+		Player = GameObject.FindGameObjectWithTag ("Player");
+		playerController = Player.GetComponent<FirstPersonController>();
 
-		Intermediate = new Vector3 (LedgeOBJ.transform.position.x,LedgeOBJ.transform.position.y +0.9f,LedgeOBJ.transform.position.z);
-		Landing = new Vector3 (LedgeOBJ.transform.position.x + 2f,LedgeOBJ.transform.position.y +0.8f,LedgeOBJ.transform.position.z);
+		// Used for manual transform of character (Legacy mode for clamber)
+		//LedgeOBJ = gameObject;
+		//Intermediate = new Vector3 (LedgeOBJ.transform.position.x,LedgeOBJ.transform.position.y +0.9f,LedgeOBJ.transform.position.z);
+		//Landing = new Vector3 (LedgeOBJ.transform.position.x + 2f,LedgeOBJ.transform.position.y +0.8f,LedgeOBJ.transform.position.z);
 
 	}
-	void OnTriggerEnter (Collider other){
+	void OnTriggerStay (Collider other){
 		if (other.gameObject == Player) {
-			Player.transform.position = Vector3.Lerp(Player.transform.position, Intermediate, 0.8f);
-			Stage1 ();
+			if(Input.GetAxis ("Vertical")>0){
+				playerController.useGravity = false;
+				playerController.m_WalkSpeed = 1f;
+				playerController.m_RunSpeed = 1f;
+			}
 		}
 	}
-	IEnumerator Stage1 (){
-		yield return new WaitForSeconds (0.2f);
-		Player.transform.position = Vector3.Lerp (Player.transform.position, Landing, 0.1f);
+	void OnTriggerExit (Collider other){
+		playerController.useGravity = true;
+		playerController.m_WalkSpeed = 5;
+		playerController.m_RunSpeed = 6;
 	}
+	/* Used for manual transform of character (Legacy mode for clamber)
+	IEnumerator Stage1 (){
+		yield return new WaitForSeconds (0.8f);
+		Player.transform.position = Vector3.Lerp (Player.transform.position, Landing, Time.deltaTime);
+	}
+	*/
 }
