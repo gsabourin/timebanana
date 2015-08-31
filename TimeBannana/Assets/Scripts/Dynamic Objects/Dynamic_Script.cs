@@ -31,7 +31,7 @@ public class Dynamic_Script : MonoBehaviour {
 		}
 		if (other.gameObject.tag == ("slowBullet")){
 			if(isSpeeding){
-				StopCoroutine ("DelaySlow");
+				StopCoroutine (DelayFast());
 				isSpeeding = false;
 			}	
 			if(Sister == true){
@@ -45,7 +45,7 @@ public class Dynamic_Script : MonoBehaviour {
 		}
 		if (other.gameObject.tag == ("fastBullet")){
 			if(isSlowing){
-				StopCoroutine ("DelayFast");
+				StopCoroutine (DelaySlow());
 				isSlowing = false;
 			}	
 			if(Sister == true){
@@ -60,17 +60,15 @@ public class Dynamic_Script : MonoBehaviour {
 	
 	IEnumerator  DelaySlow(){
 			yield return new WaitForSeconds (1.0f * timerMultiplier + 1f);
-
-			if (Sister == true) {
-				BlocksAnim.speed = 1.0f;
-				SisterAnim.speed = 1.0f;
-			} else {
-				BlocksAnim.speed = 1.0f;
-			}
+				if (Sister == true) {
+					BlocksAnim.speed = 1.0f;
+					SisterAnim.speed = 1.0f;
+				} else {
+					BlocksAnim.speed = 1.0f;
+				}
 	}
 	IEnumerator  DelayFast(){
 			yield return new WaitForSeconds (1.0f * timerMultiplier + 1f);
-
 			if (Sister == true) {
 				BlocksAnim.speed = 1.0f;
 				SisterAnim.speed = 1.0f;
