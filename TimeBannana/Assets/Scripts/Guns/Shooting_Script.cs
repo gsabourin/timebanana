@@ -16,9 +16,11 @@ public class Shooting_Script : MonoBehaviour {
 	private Text timeLock;
 	private bool LtriggerPulled = false;
 	private bool RtriggerPulled = false;
+	private HUD hudScript;
 
 	void Start (){
 		chargeSlider = GameObject.Find ("Charge_Level").GetComponent <Slider>();
+		hudScript = GameObject.Find ("UI").GetComponent<HUD> ();
 	}
 	void Update () {
 		/*if (Input.GetButtonUp ("RB")) {
@@ -27,13 +29,13 @@ public class Shooting_Script : MonoBehaviour {
 		}
 		*/
 
-		if (Input.GetButtonDown ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==1) {
+		if (hudScript.onoff == false && Input.GetButtonDown ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==1) {
 			if (chargeLevel < 20f) {
 				chargeLevel = chargeLevel + 0.5f;
 			}
 			LtriggerPulled = true;
 		}
-		if(Input.GetButtonDown ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==1){
+		if(hudScript.onoff == false && Input.GetButtonDown ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==1){
 			if (chargeLevel < 20f) {
 				chargeLevel = chargeLevel + 0.5f;
 			}
@@ -43,7 +45,7 @@ public class Shooting_Script : MonoBehaviour {
 
 
 	//Check for a LEFT click or Right trigger pull to shoot the SLOW pulse
-		if(Input.GetButtonUp ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==-1 && LtriggerPulled == true && canShootSlow == true){
+		if(hudScript.onoff == false && Input.GetButtonUp ("Shoot_Slow") || Input.GetAxis ("Shoot_Slow") ==-1 && LtriggerPulled == true && canShootSlow == true){
 			canShootSlow = false;
 			Rigidbody instantiateProjectile = Instantiate(slow_Bullet,transform.position,transform.rotation) as Rigidbody;
 			instantiateProjectile.velocity = transform.TransformDirection (new Vector3(0,0,speed));
@@ -51,7 +53,7 @@ public class Shooting_Script : MonoBehaviour {
 			LtriggerPulled = false;
 		}
 	//Check for a RIGHT click or LEFT trigger pull to shoot the FAST pulse
-		if(Input.GetButtonUp ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==-1 && RtriggerPulled == true && canShootFast == true){
+		if(hudScript.onoff == false && Input.GetButtonUp ("Shoot_Fast") || Input.GetAxis ("Shoot_Fast") ==-1 && RtriggerPulled == true && canShootFast == true){
 			canShootFast = false;
 			Rigidbody instantiateProjectile = Instantiate(fast_Bullet,transform.position,transform.rotation) as Rigidbody;
 			instantiateProjectile.velocity = transform.TransformDirection (new Vector3(0,0,speed));

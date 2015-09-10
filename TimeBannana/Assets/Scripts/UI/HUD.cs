@@ -15,8 +15,6 @@ public class HUD : MonoBehaviour {
 	private FirstPersonController playerScript;
 	private GameObject hudPanel;
 	public GameObject Pause_Menu;
-	public Slider xSenseSlider;
-	public Slider ySenseSlider;
 	public bool onoff= false;
 	public bool onoffOpp= true;
 
@@ -55,8 +53,5 @@ public class HUD : MonoBehaviour {
 		int seconds = Mathf.FloorToInt(timer - minutes * 60);
 		
 		timeText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
-
-		playerScript.m_MouseLook.XSensitivity = xSenseSlider.value;
-		playerScript.m_MouseLook.YSensitivity = ySenseSlider.value;
 	}
 }

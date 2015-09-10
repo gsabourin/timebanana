@@ -4,9 +4,11 @@ using UnityEngine.UI;
 public class Menu_Script : MonoBehaviour {
 
 	private HUD hudScript;
+	private FirstPersonController playerScript;
 
 	void Start(){
 		hudScript = GameObject.Find ("UI").GetComponent<HUD> ();
+		playerScript = GameObject.FindWithTag ("Player").GetComponent<FirstPersonController> ();
 	}
 	public void Continue(){
 		hudScript.onoff = false;
@@ -34,5 +36,17 @@ public class Menu_Script : MonoBehaviour {
 	}
 	public void QuitGame (){
 		Application.Quit();
+	}
+	public void LowSens (){
+		playerScript.m_MouseLook.XSensitivity = 2;
+		playerScript.m_MouseLook.YSensitivity = 2;
+	}
+	public void MedSens (){
+		playerScript.m_MouseLook.XSensitivity = 5;
+		playerScript.m_MouseLook.YSensitivity = 5;
+	}
+	public void HighSens (){
+		playerScript.m_MouseLook.XSensitivity = 8;
+		playerScript.m_MouseLook.YSensitivity = 8;
 	}
 }
