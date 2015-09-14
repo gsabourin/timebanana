@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Game_Manager : MonoBehaviour {
 
@@ -10,18 +11,22 @@ public class Game_Manager : MonoBehaviour {
 	private bool EndGame = false;
 	public Vector3 CheckpointPOS;
 	public bool MustReset = false;
-	public List<GameObject>  CheckList;
-
+	private HUD hudScript;
+	public List<GameObject> CheckList;
+	public float currentLVBest;
+	
 	void Start () {
 		Player = GameObject.FindWithTag ("Player");
 		CheckpointPOS = Player.transform.position;
 		//Pause_Menu = GameObject.Find("Pause_Menu");
 		CheckList.AddRange (GameObject.FindGameObjectsWithTag ("Checkpoint"));
+		hudScript = GameObject.Find ("UI").GetComponent<HUD> ();
+		CheckList = CheckList.OrderBy(go=>go.name).ToList();
+		LoadSaves ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (EndGame == true) {
 			Application.LoadLevel (Application.loadedLevel);
 			EndGame = false;
@@ -45,6 +50,7 @@ public class Game_Manager : MonoBehaviour {
 		}
 		if (other.gameObject.tag == ("DeathObject")) {
 			StartCoroutine (Wait());
+			Save ();
 		}
 	}
 
@@ -55,6 +61,21 @@ public class Game_Manager : MonoBehaviour {
 	}
 	IEnumerator WaitEnd(){
 		yield return new WaitForSeconds (0.2f);
+		EndGame = true;
+	}
+	public void LoadSaves(){
+		if (Application.loadedLevelName == ("Test_Level")) {
+				currentLVBest = PlayerPrefs.GetFloat ("TLBest");
+		}
+		hudScript.levelBest = currentLVBest;
+	}
+	public void Save(){
+		if (Application.loadedLevelName == ("Test_Level")) {
+			if(hudScript.levelBest < PlayerPrefs.GetFloat ("TLBest") ){
+				PlayerPrefs.SetFloat ("TLBest", hudScript.timer);
+			}
+		}
+		PlayerPrefs.Save();
 		EndGame = true;
 	}
 }

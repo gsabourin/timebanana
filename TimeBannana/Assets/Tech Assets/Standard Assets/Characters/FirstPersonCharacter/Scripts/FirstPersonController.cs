@@ -232,7 +232,8 @@ using Random = UnityEngine.Random;
 			of eachother so the player moves with the platform in a natural way*/
 			if (m_PreviouslyGrounded && Input.GetAxis ("Vertical") == 0 || Input.GetAxis ("Horizontal") == 0 && !m_Jumping) {
 			if(hitInfo.collider == null){
-
+				gameObject.transform.parent = null;
+				gameObject.transform.localScale = new Vector3 (1,1,1);
 			}else{
 			if(hitInfo.collider.tag ==("Sliding")){		
 					gameObject.transform.parent = hitInfo.collider.gameObject.transform;
@@ -240,6 +241,7 @@ using Random = UnityEngine.Random;
 			}
 			} else {
 					gameObject.transform.parent = null; 
+					gameObject.transform.localScale = new Vector3 (1,1,1);
 			}
 			if (hasWallRun && !hasJumped) {
 				JumpCount = 1;
