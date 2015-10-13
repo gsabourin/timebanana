@@ -50,7 +50,7 @@ public class Game_Manager : MonoBehaviour {
 		}
 		if (other.gameObject.tag == ("DeathObject")) {
 			StartCoroutine (Wait());
-			Save ();
+			//Save ();
 		}
 	}
 

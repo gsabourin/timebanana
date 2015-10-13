@@ -11,8 +11,8 @@ public class Checkpoint : MonoBehaviour {
 	public Vector3 checkpointPOS;
 	private List<GameObject> CheckList;
 	private bool hasActivated = false;
-	void Start () {
 
+	void Start () {
 		Player = GameObject.FindWithTag ("Player");
 		CheckScript = Player.GetComponent<Game_Manager> ();
 		CheckIMAGE = gameObject.GetComponent <SpriteRenderer> ();
@@ -33,5 +33,6 @@ public class Checkpoint : MonoBehaviour {
 			CheckList.Remove (gameObject);
 			hasActivated = true;
 		}
+
 	}
 }

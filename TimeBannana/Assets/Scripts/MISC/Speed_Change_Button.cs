@@ -18,7 +18,7 @@ public class Speed_Change_Button : MonoBehaviour {
 
 	}
 	
-	void OnTriggerEnter (Collision other){
+	void OnTriggerEnter (Collider other){
 		if (other.gameObject.tag == "Player") {
 
 
