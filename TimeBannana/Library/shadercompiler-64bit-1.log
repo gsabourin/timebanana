@@ -1,11 +1,3 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-6192
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-13936
 Cmd: getPlatforms
-Cmd: compileSnippet
-  error: 2 plat 1 at (1): Compiled shader code uses too many instruction slots (112). Max. allowed by the target (ps_2_0) is 96.\nCompiling Fragment program
-  error: 2 plat 1 at (78): Too many math instructions for SM2.0 (99 needed, max is 64). Try #pragma target 3.0\nCompiling Fragment program
-  api=1 type=1 insize=4239 outsize=0 kw= ok=0
-Cmd: compileSnippet
-  error: 2 plat 1 at (1): Compiled shader code uses too many instruction slots (99). Max. allowed by the target (ps_2_0) is 96.\nCompiling Fragment program
-  error: 2 plat 1 at (114): Too many math instructions for SM2.0 (91 needed, max is 64). Try #pragma target 3.0\nCompiling Fragment program
-  api=1 type=1 insize=4244 outsize=0 kw= ok=0
